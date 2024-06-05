@@ -23,7 +23,7 @@ const stateInfo = {
 
 const TopPageIndex = () => {
   const [timeStr, setTimeStr] = useState('')
-  const timing = useRef<NodeJS.Timeout | null>(null)
+  const timing = useRef<number | null>(null)
 
   // 设置时间
   const setTimingFn = () => {
