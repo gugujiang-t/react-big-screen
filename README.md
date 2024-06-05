@@ -8,10 +8,8 @@
 - [**React Class写法版本请点击这里查看**](https://gitee.com/MTrun/react-big-screen)
 - [**Vue3 版本请点击这里查看，使用 Hooks+TypeScript 实现，全新内容等你探索!**](https://gitee.com/MTrun/vue-big-screen-plugin)
 - [**Vue2 版本请点击这里查看，也很不错的(o ﾟ v ﾟ)ノ**](https://gitee.com/MTrun/big-screen-vue-datav)
-- 项目需要全屏展示（按 F11）。
 - 项目环境：react^18.2.0、vite^5.2.0、npm^9.8.1、node^18.18, zustand^4.5.2。
 - 请拉取 master 分支的代码，其余是开发分支。
-- 项目各依赖包版本较低，如有影响请自行升级。
 - 需要其它地图数据的，请查看我的其它项目（有一个地图合集）
 
 友情链接：
