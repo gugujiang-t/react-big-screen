@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { TitleColor } from './color';
 
-//  标题a
+//  标题
 export const ModuleTitle = styled.h3`
   padding: 0.125rem 0.125rem;
   color: ${TitleColor};

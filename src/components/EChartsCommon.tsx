@@ -1,8 +1,7 @@
+import { debounce } from 'lodash';
 import { useCallback, useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { EChartsType } from 'echarts';
-import 'zrender/lib/svg/svg';
-import { debounce } from '@/utils/index';
 
 type OptionType = {
   [T: string]: unknown

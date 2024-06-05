@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TitleColor } from '../../style/color'
+import { TitleColor } from '@/style/color'
 
 export const TopBox = styled.div`
   .top_box {

@@ -1,9 +1,9 @@
 import { useRoutes } from 'react-router-dom'
 import { Iconstyle } from './assets/icon/iconfont';
-import { Globalstyle } from './style/global.js';
+import { Globalstyle } from './style/global';
 import routes from './router'
 
-function App() {
+const App = () => {
   return (
     <>
       {/* 全局样式注册到界面中 */}

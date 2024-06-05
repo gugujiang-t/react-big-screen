@@ -1,5 +1,5 @@
-import { PureComponent, Fragment } from 'react';
-import { formatTime } from '../../utils';
+import { useEffect, useRef, useState } from 'react';
+import { formatTime } from '@/utils/index';
 import {
   Decoration10,
   Decoration8,
@@ -8,76 +8,74 @@ import {
 
 import { TopBox, TimeBox } from './style';
 
-class index extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '大数据可视化平台',
-      timeStr: '',
-      weekday: [
-        '星期天',
-        '星期一',
-        '星期二',
-        '星期三',
-        '星期四',
-        '星期五',
-        '星期六',
-      ],
-    };
-  }
+const stateInfo = {
+  title: '大数据可视化平台',
+  weekday: [
+    '星期天',
+    '星期一',
+    '星期二',
+    '星期三',
+    '星期四',
+    '星期五',
+    '星期六',
+  ],
+}
+
+const TopPageIndex = () => {
+  const [timeStr, setTimeStr] = useState('')
+  const timing = useRef<NodeJS.Timeout | null>(null)
 
   // 设置时间
-  componentDidMount() {
-    this.setTimingFn();
-  }
-
-  setTimingFn() {
-    this.timing = setInterval(() => {
+  const setTimingFn = () => {
+    timing.current = setInterval(() => {
       const dateYear = formatTime(new Date(), 'yyyy-MM-dd');
       const dateDay = formatTime(new Date(), 'HH: mm: ss');
-      const dateWeek = this.state.weekday[new Date().getDay()];
-      this.setState({
-        timeStr: `${dateYear} | ${dateDay} ${dateWeek}`,
-      });
+      const dateWeek = stateInfo.weekday[new Date().getDay()];
+      setTimeStr(`${dateYear} | ${dateDay} ${dateWeek}`)
     }, 1000);
   }
 
-  render() {
-    const { title } = this.state;
-    return (
-      <Fragment>
-        <TopBox>
-          <div className='top_box'>
-            <Decoration10 className='top_decoration10' />
-            <div className='title-box'>
-              <Decoration8
-                className='top_decoration8'
-                color={['#568aea', '#000000']}
-              />
-              <div className='title'>
-                <span className='title-text'>{title}</span>
-                <Decoration6
-                  className='title-bototm top_decoration6'
-                  reverse={true}
-                  color={['#50e3c2', '#67a1e5']}
-                />
-              </div>
+  useEffect(() => {
+    // 初始化开启定时
+    setTimingFn()
+    return () => {
+      if (timing.current) clearInterval(timing.current)
+    }
+  }, [])
 
-              <Decoration8
+  return (
+    <>
+      <TopBox>
+        <div className='top_box'>
+          <Decoration10 className='top_decoration10' />
+          <div className='title-box'>
+            <Decoration8
+              className='top_decoration8'
+              color={['#568aea', '#000000']}
+            />
+            <div className='title'>
+              <span className='title-text'>{stateInfo.title}</span>
+              <Decoration6
+                className='title-bototm top_decoration6'
                 reverse={true}
-                className='top_decoration8'
-                color={['#568aea', '#000000']}
+                color={['#50e3c2', '#67a1e5']}
               />
             </div>
-            <Decoration10 className='top_decoration10 top_decoration10_reverse' />
-            <TimeBox>
-              <h3>{this.state.timeStr}</h3>
-            </TimeBox>
+
+            <Decoration8
+              reverse={true}
+              className='top_decoration8'
+              color={['#568aea', '#000000']}
+            />
           </div>
-        </TopBox>
-      </Fragment>
-    );
-  }
+          <Decoration10 className='top_decoration10 top_decoration10_reverse' />
+          <TimeBox>
+            <h3>{timeStr}</h3>
+          </TimeBox>
+        </div>
+      </TopBox>
+    </>
+  );
 }
 
-export default index;
+export default TopPageIndex;

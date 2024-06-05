@@ -1,6 +1,6 @@
 import { IndexPageStyle, IndexPageContent } from './style';
 import TopPage from '../TopPage';
-// import { LeftPage } from '../LeftPage';
+import { LeftPageIndex } from '../LeftPage';
 // import { CenterPage } from '../CenterPage';
 // import { RightPage } from '../RightPage';
 
@@ -10,9 +10,9 @@ export const IndexPage = () => {
     <IndexPageStyle>
       <TopPage />
       <IndexPageContent>
-        {/* <LeftPage />
-        <CenterPage className='center-page' />
-        <RightPage /> */}
+        <LeftPageIndex />
+        {/* <CenterPage className='center-page' /> */}
+        {/* <RightPage /> */}
       </IndexPageContent>
     </IndexPageStyle>
   )

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import Chart from '../../../utils/chart';
+import EChartsCommon from '@/components/EChartsCommon';
 import { trafficOptions } from './options';
 
 class TrafficSituation extends PureComponent {
@@ -12,21 +12,21 @@ class TrafficSituation extends PureComponent {
 
   render() {
     const { renderer } = this.state;
-    const { trafficSitua } = this.props;
+    const { trafficStatus } = this.props;
     return (
       <div
         style={{
           width: '5.375rem',
           height: '3.125rem',
         }}>
-        {trafficSitua ? (
-          <Chart renderer={renderer} option={trafficOptions(trafficSitua)} />
+        {trafficStatus ? (
+          <EChartsCommon renderer={renderer} option={trafficOptions(trafficStatus)} />
         ) : (
           ''
         )}
       </div>
     );
-  } //endrender
+  }
 }
 
 export default TrafficSituation;

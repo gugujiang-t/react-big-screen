@@ -1,4 +1,4 @@
-import echarts from 'echarts/lib/echarts';
+import { graphic } from 'echarts/core'
 import 'echarts/map/js/china';
 //  地图数据
 const mapData = {
@@ -1707,7 +1707,7 @@ export const mapOptions = (params) => ({
       },
       lineStyle: {
         normal: {
-          color: new echarts.graphic.LinearGradient(
+          color: new graphic.LinearGradient(
             0,
             0,
             0,

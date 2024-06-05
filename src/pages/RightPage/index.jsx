@@ -1,25 +1,20 @@
-import React, { PureComponent } from 'react';
-import { BorderBox13 } from '@jiaminghi/data-view-react';
-import BrowseCategories from './charts/BrowseCategories';
-import UserIdentityCategory from './charts/UserIdentityCategory';
-import OfflinePortal from './charts/OfflinePortal';
-import Feedback from './charts/Feedback';
-import { ModuleTitle } from '../../style/globalStyledSet';
-import { connect } from 'dva';
-import {
-  RightPage,
-  RightTopBox,
-  RightCenterBox,
-  RightBottomBox,
-} from './style';
+import React, { PureComponent } from 'react'
+import { BorderBox13 } from '@jiaminghi/data-view-react'
+import BrowseCategories from './charts/BrowseCategories'
+import UserIdentityCategory from './charts/UserIdentityCategory'
+import OfflinePortal from './charts/OfflinePortal'
+import Feedback from './charts/Feedback'
+import { ModuleTitle } from '../../style/globalStyledSet'
+import { connect } from 'dva'
+import { RightPage, RightTopBox, RightCenterBox, RightBottomBox } from './style'
 
 class index extends PureComponent {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
   render() {
-    const { offline, browseCategories, userIdentityCategory } = this.props;
+    const { offline, browseCategories, userIdentityCategory } = this.props
     return (
       <RightPage>
         <RightTopBox>
@@ -30,11 +25,12 @@ class index extends PureComponent {
             </ModuleTitle>
             <div className='right-top-content'>
               <BrowseCategories
-                browseCategories={browseCategories}></BrowseCategories>
+                browseCategories={browseCategories}
+              ></BrowseCategories>
               <img
                 alt='地球'
                 className='earth-gif'
-                src={require('../../assets/images/earth-rotate.gif')}
+                src='@/assets/images/earth-rotate.gif'
               />
             </div>
           </div>
@@ -46,7 +42,8 @@ class index extends PureComponent {
             <span>平均用户类别排布</span>
           </ModuleTitle>
           <UserIdentityCategory
-            userIdentityCategory={userIdentityCategory}></UserIdentityCategory>
+            userIdentityCategory={userIdentityCategory}
+          ></UserIdentityCategory>
         </RightCenterBox>
 
         <RightBottomBox>
@@ -65,7 +62,7 @@ class index extends PureComponent {
                           <Feedback FeedbackData={item}></Feedback>
                           <span className='dis-text'>{item.title}</span>
                         </div>
-                      );
+                      )
                     })
                   : ''}
               </div>
@@ -83,7 +80,7 @@ class index extends PureComponent {
           </BorderBox13>
         </RightBottomBox>
       </RightPage>
-    );
+    )
   }
 }
 
@@ -91,10 +88,10 @@ const mapStateToProps = state => {
   return {
     browseCategories: state.rightPage.browseCategories,
     userIdentityCategory: state.rightPage.userIdentityCategory,
-    offline: state.rightPage.offline,
-  };
-};
+    offline: state.rightPage.offline
+  }
+}
 
-const mapStateToDispatch = dispatch => ({});
+const mapStateToDispatch = dispatch => ({})
 
-export default connect(mapStateToProps, mapStateToDispatch)(index);
+export default connect(mapStateToProps, mapStateToDispatch)(index)

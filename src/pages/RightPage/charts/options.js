@@ -1,4 +1,4 @@
-import echarts from 'echarts/lib/echarts';
+import { graphic } from 'echarts/core'
 
 // 关联数据类别
 export const BrowseCategoriesOptions = params => ({
@@ -106,7 +106,7 @@ export const FeedbackOptions = params => ({
           name: params.title,
           itemStyle: {
             normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              color: new graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
                   color: '#5a8bfa',
@@ -296,7 +296,7 @@ export const OfflinePortalOptions = params => ({
       data: params.barData,
       itemStyle: {
         normal: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new  graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
               color: 'rgba(34,224,214,.8)',

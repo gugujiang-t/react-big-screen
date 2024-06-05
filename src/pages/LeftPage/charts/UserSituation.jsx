@@ -28,15 +28,15 @@ class UserSituation extends PureComponent {
   }
 
   render() {
-    const { userSitua } = this.props;
+    const { userStatus } = this.props;
     const config = {
       ...this.state.config,
-      ...userOptions(userSitua),
+      ...userOptions(userStatus),
     };
 
     return (
       <div>
-        {userSitua ? (
+        {userStatus ? (
           <ScrollBoard
             config={config}
             style={{
