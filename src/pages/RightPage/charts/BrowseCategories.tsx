@@ -1,27 +1,22 @@
 import { BrowseCategoriesOptions } from './offlinePortalOptions';
 import EChartsCommon from '@/components/EChartsCommon'
-import { RendererType } from 'echarts/types/src/util/types.js';
+import useConfigStore from '@/store/index'
 
-const state: {
-  renderer: RendererType
-} = {
-  renderer: 'canvas'
-}
 
 // 关联数据类别
 export const BrowseCategories = (props) => {
+  const renderer = useConfigStore((state) => state.renderer)
 
-  const { browseCategories } = props;
   return (
     <div
       style={{
-        width: '5.375rem',
-        height: '2.5rem',
+        width: '430px',
+        height: '200px',
       }}>
-      {browseCategories ? (
+      {props.browseCategories ? (
         <EChartsCommon
-          renderer={state.renderer}
-          option={BrowseCategoriesOptions(browseCategories)}
+          renderer={renderer}
+          option={BrowseCategoriesOptions(props.browseCategories)}
         />
       ) : (
         ''

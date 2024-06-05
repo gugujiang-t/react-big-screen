@@ -9,7 +9,7 @@ export const TopBox = styled.div`
     .top_decoration10 {
       position: relative;
       width: 33.3%;
-      height: 0.0625rem;
+      height: 5px;
     }
 
     .top_decoration10_reverse {
@@ -21,19 +21,19 @@ export const TopBox = styled.div`
       justify-content: center;
 
       .top_decoration8 {
-        width: 2.5rem;
-        height: 0.625rem;
+        width: 200px;
+        height: 50px;
       }
 
       .title {
         position: relative;
-        width: 6.25rem;
+        width: 500px;
         text-align: center;
         background-size: cover;
         background-repeat: no-repeat;
 
         .title-text {
-          font-size: 0.3rem;
+          font-size: 24px;
           position: absolute;
           bottom: 0;
           left: 50%;
@@ -42,13 +42,13 @@ export const TopBox = styled.div`
         }
 
         .top_decoration6 {
-          width: 3.125rem;
-          height: 0.1rem;
+          width: 250px;
+          height: 8px;
         }
 
         .title-bototm {
           position: absolute;
-          bottom: -0.375rem;
+          bottom: -30px;
           left: 50%;
           transform: translate(-50%);
         }
@@ -59,12 +59,12 @@ export const TopBox = styled.div`
 
 export const TimeBox = styled.div`
   position: absolute;
-  right: 0.375rem;
-  top: 0.5rem;
+  right: 30px;
+  top: 40px;
   text-align: right;
   color: #fff;
   h3{
-    font-size: 0.225rem;
+    font-size: 18px;
     color: ${TitleColor};
   }
 `;

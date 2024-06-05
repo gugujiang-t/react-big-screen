@@ -20,8 +20,8 @@ const UserSituation = (props) => {
         <CapsuleChart
           config={config}
           style={{
-            width: '5.85rem',
-            height: '2.625rem',
+            width: '468px',
+            height: '210px',
           }}
         />
       ) : (

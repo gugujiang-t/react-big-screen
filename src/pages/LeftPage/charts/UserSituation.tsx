@@ -34,8 +34,8 @@ const UserSituation = props => {
         <ScrollBoard
           config={config}
           style={{
-            width: '5.475rem',
-            height: '6.875rem'
+            width: '438px',
+            height: '550px'
           }}
         ></ScrollBoard>
       ) : (

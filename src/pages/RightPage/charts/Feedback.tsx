@@ -1,23 +1,20 @@
 import EChartsCommon from '@/components/EChartsCommon'
 import { FeedbackOptions } from './offlinePortalOptions'
-import { RendererType } from 'echarts/types/src/util/types.js'
+import useConfigStore from '@/store/index'
 
-const state: {
-  renderer: RendererType
-} = {
-  renderer: 'canvas'
-}
 
 export const Feedback = (props) => {
+  const renderer = useConfigStore((state) => state.renderer)
+
   return (
     <div
       style={{
-        width: '1.25rem',
-        height: '1.25rem'
+        width: '100px',
+        height: '100px'
       }}
     >
       <EChartsCommon
-        renderer={state.renderer}
+        renderer={renderer}
         option={FeedbackOptions(props.FeedbackData)}
       />
     </div>

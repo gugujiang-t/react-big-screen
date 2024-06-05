@@ -1,24 +1,19 @@
 import EChartsCommon from '@/components/EChartsCommon'
 import { mapOptions } from './options'
-import { RendererType } from 'echarts/types/src/util/types.js'
-
-const state: {
-  renderer: RendererType
-} = {
-  renderer: 'canvas'
-}
+import useConfigStore from '@/store/index'
 
 const Map = ({ mapData }) => {
+  const renderer = useConfigStore((state) => state.renderer)
   return (
     <div
       style={{
-        width: '10.625rem',
-        height: '8.125rem'
+        width: '920px',
+        height: '650px'
       }}
     >
       {(mapData) ? (
         <EChartsCommon
-          renderer={state.renderer}
+          renderer={renderer}
           option={mapOptions(mapData)}
         />
       ) : (

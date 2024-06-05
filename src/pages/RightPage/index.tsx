@@ -5,7 +5,7 @@ import { rightPageDataType } from '@/api/mock/rightPageData'
 import { RightPage, RightTopBox, RightCenterBox, RightBottomBox } from './style'
 import { get } from '@/api/http'
 import { ResultEnum } from '@/enums/httpEnum'
-import { centerPageDataApi } from '@/api/mock/index'
+import { rightPageDataApi } from '@/api/mock/index'
 import earthRotate from '@/assets/images/earth-rotate.gif'
 
 import BrowseCategories from './charts/BrowseCategories'
@@ -17,7 +17,7 @@ export const RightPageIndex = () => {
   const [rightData, setRightData] = useState<rightPageDataType | undefined>(undefined)
 
   const fetchData = async () => {
-    const res = await get(centerPageDataApi)
+    const res = await get(rightPageDataApi)
     if (res.code === ResultEnum.SUCCESS) {
       setRightData(res.data)
     }

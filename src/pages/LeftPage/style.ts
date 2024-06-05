@@ -1,34 +1,34 @@
 import styled from 'styled-components';
 
 export const LeftPage = styled.div`
-  width: 6.25rem;
+  width: 500px;
   height: auto;
-  padding: 0.2rem;
+  padding: 16px;
   padding-bottom: 0px;
 `;
 
 export const LeftTopBox = styled.div`
   position: relative;
-  height: 4.375rem;
+  height: 350px;
   width: 100%;
   .left-top-borderBox12 {
     width: inherit;
     height: inherit;
-    padding: 0.1875rem;
+    padding: 15px;
     .left-top {
       width: 100%;
       height: 100%;
       border-radius: 10px;
       background-color: rgba(19, 25, 47, 0.6);
       .title-dis {
-        margin-top: 0.1875rem;
+        margin-top: 15px;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        font-size: 0.2rem;
+        font-size: 16px;
         color: #c0c9d2;
         &-keyword {
-          padding-left: 0.125rem;
+          padding-left: 10px;
           color: #47dae8;
         }
       }
@@ -37,13 +37,13 @@ export const LeftTopBox = styled.div`
 `;
 export const LeftBottomBox = styled.div`
   position: relative;
-  margin-top: 0.25rem;
-  height: 7.75rem;
+  margin-top: 20px;
+  height: 620px;
   width: 100%;
   .left-bottom-borderBox13 {
     width: inherit;
     height: inherit;
-    padding: 0.25rem 0.1875rem;
+    padding: 20px 15px;
     .left-bottom {
       width: 100%;
       height: 100%;

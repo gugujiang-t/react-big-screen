@@ -8,6 +8,9 @@ dependencies:
   '@jiaminghi/data-view-react':
     specifier: ^1.2.5
     version: 1.2.5(react-dom@18.3.1)(react@18.3.1)
+  '@types/lodash':
+    specifier: ^4.17.4
+    version: 4.17.4
   '@types/mockjs':
     specifier: ^1.0.10
     version: 1.0.10
@@ -809,6 +812,10 @@ packages:
 
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
+
+  /@types/lodash@4.17.4:
+    resolution: {integrity: sha512-wYCP26ZLxaT3R39kiN2+HcJ4kTd3U1waI/cY7ivWYqFP6pW3ZNpvi6Wd6PHZx7T/t8z0vlkXMg3QYLa7DZ/IJQ==}
+    dev: false
 
   /@types/mockjs@1.0.10:
     resolution: {integrity: sha512-SXgrhajHG7boLv6oU93CcmdDm0HYRiceuz6b+7z+/2lCJPTWDv0V5YiwFHT2ejE4bQqgSXQiVPQYPWv7LGsK1g==}

@@ -1,22 +1,18 @@
 import EChartsCommon from '@/components/EChartsCommon'
 import { OfflinePortalOptions } from './offlinePortalOptions';
-import { RendererType } from 'echarts/types/src/util/types.js';
+import useConfigStore from '@/store/index'
 
-
-const state: {
-  renderer: RendererType
-} = {
-  renderer: 'canvas'
-}
 export const OfflinePortal = (props) => {
+  const renderer = useConfigStore((state) => state.renderer)
+
   return (
     <div
       style={{
-        width: '5.375rem',
-        height: '2.875rem',
+        width: '430px',
+        height: '230px',
       }}>
       <EChartsCommon
-        renderer={state.renderer}
+        renderer={renderer}
         option={OfflinePortalOptions(props.offlinePortalData)}
       />
     </div>
