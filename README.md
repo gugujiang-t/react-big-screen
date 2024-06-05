@@ -32,33 +32,37 @@
 Project
 ├── mock 模拟数据
 ├── src
+│  │  ├── api 接口请求和mock模拟
 │  │  ├── assets 静态资源
 │  │  ├── components 各个模块组件
+│  │  ├── enums 定义各类枚举
+│  │  ├── pages 页面中的各个模块核心实现
+│  │  ├── routes 路由配置定义
 │  │  ├── store zustand 状态管理
-│  │  ├── routes 路由主界面定义
-│  │  ├── services 异步获取函数
 │  │  ├── style 全局样式
 │  │  └── utils 工具函数
-│  │
-│  ├── index.js 主函数文件
-│  └── router.jsx 路由定义文件
+│  ├── App.tsx 主渲染
+│  ├── main.tsx 文件入口
+│  └── vite-env.d.ts 全局配置类型声明
 │
-└── .roadhogrc.mock.js 导出模拟数据
+│—— .env 全局配置
+│—— tsconfig.json ts配置
+└── vite.config.ts vite配置，包括moke接口拦截
 ```
 
 ## 三、详情介绍
 
 ### 启动项目
 
-需要提前安装好 `nodejs` 与 `npm`,下载项目后在项目主目录下运行 `pnpm install` 拉取依赖包，使用命令 `npm run dev` 启动项目，启动项目后需要手动全屏（按 F11）进行查看。
+需要提前安装好 `nodejs` 与 `npm` 和 `pnpm`,下载项目后在项目主目录下运行 `pnpm install` 拉取依赖包，使用命令 `npm run dev` 启动项目。
 
 ### 数据请求模拟
 
-项目模拟数据方式，数据放置在 `mock` 文件夹中
+项目模拟数据方式，数据放置在 `api-mock` 文件夹中，采用 `axios` 进行请求，`mock 的配置入口在 `vite.config.ts` 文件中
 
 ### 图表组件
 
-图表组件主要使用了 ECharts 和 DataV 可视化框架来进行开发。图表文件在 `components/*/charts` 中，配置文件在 `charts/options.js` 里，动态数据由各个 `page/index.js` 进行接受和导入。ECharts 渲染函数统一封装在了 `utils/chart.js` 中。
+图表组件主要使用了 ECharts 和 DataV 可视化框架来进行开发。图表文件在 `pages/*/charts` 中，ECharts 渲染函数统一封装在了 `components/EChartsCommon.tsx` 中。
 
 ### 样式编写
 
@@ -116,31 +120,22 @@ export const Iconstyle = createGlobalStyle`
 
 ### 屏幕适配
 
-本项目借助了 `utils/flexible.js` 插件，通过改变 rem 的值来进行适配，原设计为 1920px。 ，适配区间为：1366px ~ 2560px，本项目有根据实际情况进行源文件的更改，小屏幕（如:宽为 1366px）需要自己舍弃部分动态组件进行适配，如'动态文字变换组件'会影响布局，需要手动换成一般节点，
+本项目放弃了 `Class` 版本的 `rem` 适配方案，采用更加灵活的 `scale` 缩放适配方案, 适配注册入口在 `src\pages\IndexPage\layout.tsx`，实现代码在 `src\utils\previewScale.ts` 中。
 
-```js
-// flexible文件位置: `common/flexible.js`,修改部分如下
-function refreshRem() {
-  var width = docEl.getBoundingClientRect().width;
-  // 最小1366px，最大适配2560px
-  if (width / dpr < 1366) {
-    width = 1366 * dpr;
-  } else if (width / dpr > 2560) {
-    width = 2560 * dpr;
-  }
-  // 原项目是1920px我设置成24等份，这样1rem就是80px
-  var rem = width / 24;
-  docEl.style.fontSize = rem + 'px';
-  flexible.rem = win.rem = rem;
-}
-```
+### 全局管理
 
-## 五、反馈
+全局数据管理采用灵活的 `zustand` ，管理组件的渲染方式为 `canvas | svg`。
+
+### 路由
+
+路由采用了个人喜欢的声明式写法， 当然你也可以使用 `Dom` 嵌套写法。
+
+## 四、反馈
 
 QQ群：495755841
 
 <img src="public/QQ2.png" width="200px"/>
 
-## 六、其余
+## 五、其余
 
 这个项目是个人的作品，难免会有问题和 BUG，如果有问题请进行评论，我也会尽力去更新，自己也在前端学习的路上，欢迎交流，非常感谢！
