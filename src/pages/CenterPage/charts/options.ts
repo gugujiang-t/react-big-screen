@@ -1,5 +1,5 @@
 import { graphic } from 'echarts/core'
-import 'echarts/map/js/china';
+
 //  地图数据
 const mapData = {
   citys: [

@@ -7,8 +7,7 @@ export const BrowseCategoriesOptions = params => ({
     radius: '70%',
     name: {
       formatter: function (name) {
-        let arr;
-        arr = ['{a|' + name + '}'];
+        const arr = ['{a|' + name + '}'];
         return arr.join('\n');
       },
       textStyle: {

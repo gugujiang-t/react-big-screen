@@ -1,21 +1,34 @@
-import React, { PureComponent } from 'react'
+import { useEffect, useState } from 'react'
 import { BorderBox13 } from '@jiaminghi/data-view-react'
+import { ModuleTitle } from '@/style/globalStyledSet'
+import { rightPageDataType } from '@/api/mock/rightPageData'
+import { RightPage, RightTopBox, RightCenterBox, RightBottomBox } from './style'
+import { get } from '@/api/http'
+import { ResultEnum } from '@/enums/httpEnum'
+import { centerPageDataApi } from '@/api/mock/index'
+import earthRotate from '@/assets/images/earth-rotate.gif'
+
 import BrowseCategories from './charts/BrowseCategories'
 import UserIdentityCategory from './charts/UserIdentityCategory'
 import OfflinePortal from './charts/OfflinePortal'
 import Feedback from './charts/Feedback'
-import { ModuleTitle } from '../../style/globalStyledSet'
-import { connect } from 'dva'
-import { RightPage, RightTopBox, RightCenterBox, RightBottomBox } from './style'
 
-class index extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {}
+export const RightPageIndex = () => {
+  const [rightData, setRightData] = useState<rightPageDataType | undefined>(undefined)
+
+  const fetchData = async () => {
+    const res = await get(centerPageDataApi)
+    if (res.code === ResultEnum.SUCCESS) {
+      setRightData(res.data)
+    }
   }
-  render() {
-    const { offline, browseCategories, userIdentityCategory } = this.props
-    return (
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  return (
+    rightData ? (
       <RightPage>
         <RightTopBox>
           <div className='right-top'>
@@ -25,12 +38,12 @@ class index extends PureComponent {
             </ModuleTitle>
             <div className='right-top-content'>
               <BrowseCategories
-                browseCategories={browseCategories}
+                browseCategories={rightData.browseCategories}
               ></BrowseCategories>
               <img
                 alt='地球'
                 className='earth-gif'
-                src='@/assets/images/earth-rotate.gif'
+                src={earthRotate}
               />
             </div>
           </div>
@@ -42,7 +55,7 @@ class index extends PureComponent {
             <span>平均用户类别排布</span>
           </ModuleTitle>
           <UserIdentityCategory
-            userIdentityCategory={userIdentityCategory}
+            userIdentityCategory={rightData.userIdentityCategory}
           ></UserIdentityCategory>
         </RightCenterBox>
 
@@ -55,22 +68,22 @@ class index extends PureComponent {
               </ModuleTitle>
               {/* 反馈 */}
               <div className='feedback-box'>
-                {offline
-                  ? offline.feedback.map((item, index) => {
-                      return (
-                        <div className='feedback-box-item' key={index}>
-                          <Feedback FeedbackData={item}></Feedback>
-                          <span className='dis-text'>{item.title}</span>
-                        </div>
-                      )
-                    })
+                {rightData.offline
+                  ? rightData.offline.feedback.map((item, index) => {
+                    return (
+                      <div className='feedback-box-item' key={index}>
+                        <Feedback FeedbackData={item}></Feedback>
+                        <span className='dis-text'>{item.title}</span>
+                      </div>
+                    )
+                  })
                   : ''}
               </div>
               {/* 门店 */}
               <div className='offline-portal-box'>
-                {offline ? (
+                {rightData.offline ? (
                   <OfflinePortal
-                    offlinePortalData={offline.offlinePortalData}
+                    offlinePortalData={rightData.offline.offlinePortalData}
                   />
                 ) : (
                   ''
@@ -79,19 +92,7 @@ class index extends PureComponent {
             </div>
           </BorderBox13>
         </RightBottomBox>
-      </RightPage>
-    )
-  }
+      </RightPage>)
+      : <div>loading...</div>
+  )
 }
-
-const mapStateToProps = state => {
-  return {
-    browseCategories: state.rightPage.browseCategories,
-    userIdentityCategory: state.rightPage.userIdentityCategory,
-    offline: state.rightPage.offline
-  }
-}
-
-const mapStateToDispatch = dispatch => ({})
-
-export default connect(mapStateToProps, mapStateToDispatch)(index)

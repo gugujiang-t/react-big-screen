@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const CenterPage = styled.div`
-  margin-top: 0.25rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0.25rem;
 `;
 
 export const CenterBottom = styled.div`

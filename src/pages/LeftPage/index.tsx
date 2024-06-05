@@ -65,6 +65,5 @@ export const LeftPageIndex = () => {
         </BorderBox13>
       </LeftBottomBox>
     </LeftPage> : <div>loading...</div>
-
 }
 

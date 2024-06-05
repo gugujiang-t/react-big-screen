@@ -2,6 +2,9 @@ import { debounce } from 'lodash';
 import { useCallback, useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { EChartsType } from 'echarts';
+import { RendererType } from 'echarts/types/src/util/types.js';
+import china from '@/assets/map/china.json';
+import { GeoJSONCompressed } from 'echarts/types/src/coord/geo/geoTypes.js';
 
 type OptionType = {
   [T: string]: unknown
@@ -12,13 +15,15 @@ const state = {
   height: '100%',
 };
 
-const EChartsCommon = (props: {
-  renderer: 'canvas' | 'svg',
-  notMerge: boolean,
-  lazyUpdate: boolean,
-  option: OptionType
-}) => {
+echarts.registerMap('china', china as unknown as GeoJSONCompressed)
 
+const EChartsCommon = (props: {
+  renderer?: RendererType,
+  notMerge?: boolean,
+  lazyUpdate?: boolean,
+  option: OptionType,
+  instanceHandle?: (instance: EChartsType) => void
+}) => {
   const drawDomRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<EChartsType | null>(null);
 
@@ -30,16 +35,9 @@ const EChartsCommon = (props: {
     chartRef.current = null;
   };
 
-  const initChart = (dom: HTMLDivElement | null) => {
-    if (!dom) return
-    // renderer 用于配置渲染方式 可以是 svg 或者 canvas
-    const renderer = props.renderer || 'canvas';
-    chartRef.current = echarts.init(dom, null, {
-      renderer,
-      width: 'auto',
-      height: 'auto',
-    });
-  }
+  const resize = debounce(() => {
+    chartRef.current && chartRef.current.resize();
+  }, 100);
 
 
   const setOption = useCallback((option: OptionType) => {
@@ -51,21 +49,35 @@ const EChartsCommon = (props: {
     chartRef.current.setOption(option, notMerge, lazyUpdate);
   }, [props.notMerge, props.lazyUpdate]);
 
-  const resize = debounce(() => {
-    chartRef.current && chartRef.current.resize();
-  }, 100);
 
-  const initHandle = () => {
-    // 初始化图表
-    initChart(drawDomRef.current);
-    // 将传入的配置(包含数据)注入
+  // 初始化组件
+  const initChart = (dom: HTMLDivElement | null) => {
+    if (chartRef.current) return
+    if (!dom) return
+    // renderer 用于配置渲染方式 可以是 svg 或者 canvas
+    const renderer = props.renderer || 'canvas';
+    chartRef.current = echarts.init(dom, null, {
+      renderer,
+      width: 'auto',
+      height: 'auto',
+    });
+    // 执行初始化的任务，例如注册地图
+    if (props.instanceHandle) props.instanceHandle(chartRef.current)
     setOption(props.option);
     // 监听屏幕缩放，重新绘制 echart 图表
     window.addEventListener('resize', resize);
   }
 
+  const initHandle = () => {
+    // 还没实例走初始化
+    if (!chartRef.current) {
+      initChart(drawDomRef.current);
+    } else {
+      setOption(props.option);
+    }
+  }
+
   useEffect(() => {
-    initHandle()
     // 组件卸载
     return () => {
       window.removeEventListener('resize', resize);
@@ -75,8 +87,8 @@ const EChartsCommon = (props: {
 
   // 每次更新组件都重置
   useEffect(() => {
-    setOption(props.option)
-  }, [props.option, setOption])
+    initHandle()
+  }, [props.option])
 
   return (
     <div
